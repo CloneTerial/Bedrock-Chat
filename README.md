@@ -2,6 +2,12 @@
 
 Bedrock Chat is an interactive AI platform that combines the power of Claude 4.5/Opus/Sonnet models (via AWS Bedrock) with an Autonomous Agent system. Designed for developers and financial analysts, this application enables AI to interact directly with your file system, perform real-time market research, and execute automated macroeconomic analysis.
 
+## System Compatibility
+
+**Important:** Currently, this project is exclusively designed for **Windows OS**.
+- The tool execution logic uses Windows-specific shell commands (e.g., `cd /d`).
+- Linux/macOS support is not yet implemented.
+
 ## Key Features
 
 - **Multi-Model Support**: Seamless integration with AWS Bedrock (Claude series) and OpenAI Compatible APIs (DeepSeek, Qwen).
@@ -42,7 +48,7 @@ Using a Virtual Environment is recommended:
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
