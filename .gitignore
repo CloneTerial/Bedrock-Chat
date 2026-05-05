@@ -1,0 +1,14 @@
+.env
+chats/
+knowledge_base/
+uploads/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.log
+settings.json
+macro_data_output/
+node_modules/
+venv/
+.python-version
