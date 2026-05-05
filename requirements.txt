@@ -18,3 +18,4 @@ tqdm
 colorama
 scipy
 statsmodels
+python-multipart
