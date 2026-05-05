@@ -1,4 +1,5 @@
 import os
+import aiofiles
 
 async def read_file(inp: dict):
     """Read content from a local text file with a 100k character limit."""
@@ -13,17 +14,36 @@ async def read_file(inp: dict):
         return {"error": f"Failed to read file: {str(e)}"}
 
 async def write_file(inp: dict):
-    """Create or overwrite a file with provided content."""
     file_path = inp.get("file_path", "")
     content = inp.get("content", "")
+
+    if not file_path:
+        return {"error": "file_path is required"}
+
     try:
+        dir_name = os.path.dirname(file_path)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
+
+        tmp_path = file_path + ".tmp"
+
+        async with aiofiles.open(tmp_path, "w", encoding="utf-8") as f:
+            for i in range(0, len(content), 8192):
+                await f.write(content[i:i+8192])
+
+        os.replace(tmp_path, file_path)
+
         msg = "File updated successfully."
-        if file_path in ["server.py", "config.py"]:
+
+        if os.path.basename(file_path) in ["server.py", "config.py"]:
             msg += " WARNING: Server will restart shortly due to changes in core files."
-        
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
-        return {"status": "success", "file_path": file_path, "message": msg}
+
+        return {
+            "status": "success",
+            "file_path": file_path,
+            "message": msg
+        }
+
     except Exception as e:
         return {"error": f"Failed to write file: {str(e)}"}
 
