@@ -96,6 +96,10 @@ You can issue complex commands such as:
 
 - This application has **full access to the shell and file system** (via `execute_shell` and `write_file`). It should only be used in a secure environment (sandbox or local development).
 
+## Preview
+
+![Bedrock Chat Preview](bedrock-chat.PNG)
+
 ## License
 
 MIT License - See [LICENSE](LICENSE) for more details.
